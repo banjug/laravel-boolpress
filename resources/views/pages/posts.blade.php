@@ -17,7 +17,7 @@
                         <p class="badge badge-pill badge-primary">{{$post->category->name}}</p>
                     </div>
                     <div class="row">
-                        <p class="text-muted">{{$post->created_at}}</p>
+                        <p class="text-muted">{{$post->created_at->format('d-m-Y H:m')}}</p>
                     </div>
                     <div class="row">
                         <p class="text-muted">{{$post->text}}</p>
