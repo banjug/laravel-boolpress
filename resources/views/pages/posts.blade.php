@@ -6,10 +6,11 @@
                     <div class="row mb-5 lead">
                         <a href="{{route('home')}}">Login or Register</a>
                     </div>
+                @else
+                    <div class="row mb-5 lead">
+                        <a class="btn btn-primary" href="{{route('createPost')}}">Create new Post</a>
+                    </div>
                 @endguest
-                <div class="row mb-5 lead">
-                    <a href="{{route('create')}}">Create new Post</a>
-                </div>
                 @foreach ($posts as $post)
                     <div class="row">
                         <h3>{{$post->title}}</h3>

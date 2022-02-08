@@ -19,6 +19,6 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/posts', 'PostController@posts')->name('posts');
 
 Route::middleware('auth')->prefix('/posts')->group(function() { //posso aggiungere ->prefix('posts') siccome le rotte sono raggruppate e aggiunge /posts prima di ogni url
-    Route::get('/posts/create', 'PostController@create')->name('create');
-    Route::post('/posts/store', 'PostController@store')->name('store');
+    Route::get('/create', 'PostController@createPost')->name('createPost');
+    Route::post('/store', 'PostController@storePost')->name('storePost');
 });
