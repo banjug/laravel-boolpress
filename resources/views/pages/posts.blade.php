@@ -13,8 +13,13 @@
                 @endguest
                 @foreach ($posts as $post)
                     <div class="row">
+                        <p class="lead text-capitalize">{{$post->category->name}}</p>
+                    </div>
+                    <div class="row">
                         <h3>{{$post->title}}</h3>
-                        <p class="badge badge-pill badge-primary">{{$post->category->name}}</p>
+                        @foreach ($post->tags as $tag)
+                            <p class="badge badge-pill badge-secondary ml-3">{{$tag->name}}</p>
+                        @endforeach
                     </div>
                     <div class="row">
                         <p class="text-muted">{{$post->created_at->format('d-m-Y H:m')}}</p>
