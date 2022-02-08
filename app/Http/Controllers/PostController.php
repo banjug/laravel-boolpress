@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Tag;
 
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class PostController extends Controller
     }
     public function createPost() {
         $categories=Category::all();
-        return view('pages.post-create', compact('categories'));
+        $tags=Tag::all();
+        return view('pages.post-create', compact('categories', 'tags'));
     }
     public function storePost(Request $request) {
         $data = $request->validate([
@@ -22,9 +24,13 @@ class PostController extends Controller
             "text"=>"required|string",
         ]);
         $post = Post::make($data);
-        $category = Category::findOrFail($request->get('category'));
 
+        $category = Category::findOrFail($request->get('category'));
         $post->category()->associate($category);
+        $post->save();
+
+        $tags = Tag::findOrFail($request->get('tags'));
+        $post->tags()->attach($tags);
         $post->save();
 
         return redirect()->route('posts');

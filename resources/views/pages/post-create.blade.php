@@ -22,6 +22,12 @@
                     <label for="text">Text</label>
                     <textarea rows="5" name="text" class="form-control" placeholder="Text"></textarea>
                 </div>
+                <div class="form-group">
+                    <label for="">Tags</label><br>
+                    @foreach ($tags as $tag)                        
+                        <input type="checkbox" name="tags[]" value="{{$tag->id}}"><span>{{$tag->name}}</span>
+                    @endforeach
+                </div>
                 
                 <input type="submit" value="Save new post" class="btn btn-primary">
             </form>
