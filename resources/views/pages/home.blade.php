@@ -1,6 +1,11 @@
 @extends('layouts.main-layout')
 @section('content')
     <main id="app">
+
+        <div class="container">
+            <p class="lead text-center">Go to <a href="{{route('posts')}}">Posts</a></p>
+        </div>
+
         {{-- sezione guest  --}}
         @guest
 
@@ -53,12 +58,7 @@
                     <input type="submit" value="Login" class="btn btn-outline-primary">
                 </form>
             </div>
-        @endguest
-
-        @auth
-            <div class="container">
-                <p class="lead text-center">Go to <a href="{{route('posts')}}">Posts</a></p>
-            </div>
-        @endauth
+        @endguest     
+        
     </main>
 @endsection

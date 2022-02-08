@@ -1,9 +1,12 @@
 @extends('layouts.main-layout')
 @section('content')
-    <main id="app">
-        {{-- sezione utente autenticato  --}}
-        @auth
+    <main id="app">        
             <div class="container">
+                @guest
+                    <div class="row mb-5 lead">
+                        <a href="{{route('home')}}">Login or Register</a>
+                    </div>
+                @endguest
                 <div class="row mb-5 lead">
                     <a href="{{route('create')}}">Create new Post</a>
                 </div>
@@ -13,14 +16,16 @@
                         <p class="badge badge-pill badge-primary">{{$post->category->name}}</p>
                     </div>
                     <div class="row">
-                        <p class="lead">Likes: {{$post->likes}}</p>
+                        <p class="text-muted">{{$post->created_at}}</p>
                     </div>
                     <div class="row">
                         <p class="text-muted">{{$post->text}}</p>
                     </div>
+                    <div class="row">
+                        <p class="lead">Likes: {{$post->likes}}</p>
+                    </div>
                     <hr>
                 @endforeach
             </div>
-        @endauth
     </main>
 @endsection
