@@ -3,7 +3,7 @@
     <main id="app">
         <div class="container">
             <h2>Edit post</h2>
-            <form action="{{route('editPost')}}" method="POST">
+            <form action="#" method="POST">
                 @method('POST')
                 @csrf
                 <div class="form-group">
@@ -14,7 +14,11 @@
                     <label for="category">Category</label>
                     <select name="category" class="form-control">
                         @foreach ($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            <option value="{{$category->id}}"
+                                @if ($category->id==$post->category->id)
+                                    selected
+                                @endif    
+                            >{{$category->name}}</option>
                         @endforeach
                     </select>
                 </div>
