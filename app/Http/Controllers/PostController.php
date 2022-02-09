@@ -13,6 +13,8 @@ class PostController extends Controller
         $posts = Post::orderBy('created_at', 'desc')->get();
         return view('pages.posts', compact('posts'));
     }
+
+    // new post
     public function createPost() {
         $categories=Category::all();
         $tags=Tag::all();
@@ -40,6 +42,8 @@ class PostController extends Controller
 
         return redirect()->route('posts');
     }
+
+    // edit post
     public function editPost($id) {
         $categories=Category::all();
         $tags=Tag::all();
@@ -68,6 +72,16 @@ class PostController extends Controller
         $post->tags()->sync($tags);
         $post->save();        
      
+        return redirect()->route('posts');
+    }
+    // delete post
+    public function deletePost($id) {
+        $post = Post::findOrFail($id);
+
+        $post->tags()->sync([]);
+        $post->save();        
+
+        $post->delete();
         return redirect()->route('posts');
     }
 }
