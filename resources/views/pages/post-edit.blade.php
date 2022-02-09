@@ -3,7 +3,7 @@
     <main id="app">
         <div class="container">
             <h2>Edit post</h2>
-            <form action="#" method="POST">
+            <form action="{{route('updatePost', $post->id)}}" method="POST">
                 @method('POST')
                 @csrf
                 <div class="form-group">
@@ -15,7 +15,7 @@
                     <select name="category" class="form-control">
                         @foreach ($categories as $category)
                             <option value="{{$category->id}}"
-                                @if ($category->id==$post->category->id)
+                                @if ($category->id == $post->category->id)
                                     selected
                                 @endif    
                             >{{$category->name}}</option>
@@ -29,11 +29,17 @@
                 <div class="form-group">
                     <label for="">Tags</label><br>
                     @foreach ($tags as $tag)                        
-                        <input type="checkbox" name="tags[]" value="{{$tag->id}}"><span>{{$tag->name}}</span>
+                        <input type="checkbox" name="tags[]" value="{{$tag->id}}"
+                            @foreach ($post->tags as $postTag)
+                                @if ($tag->id == $postTag->id)
+                                    checked
+                                @endif
+                            @endforeach
+                        ><span class="mr-3"> {{$tag->name}}</span>
                     @endforeach
                 </div>
                 
-                <input type="submit" value="Save new post" class="btn btn-primary">
+                <input type="submit" value="Save edit" class="btn btn-primary">
             </form>
         </div>
     </main>

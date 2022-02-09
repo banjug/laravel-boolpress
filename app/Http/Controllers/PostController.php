@@ -29,7 +29,12 @@ class PostController extends Controller
         $post->category()->associate($category);
         $post->save();
 
-        $tags = Tag::findOrFail($request->get('tags'));
+        // versione 1 per controllare se ci sono tags
+        $tags = [];
+        if ($request->has('tags')) {
+            $tags = Tag::findOrFail($request->get('tags'));
+        }
+
         $post->tags()->attach($tags);
         $post->save();
 
@@ -41,5 +46,28 @@ class PostController extends Controller
         $post=Post::findOrFail($id);
         
         return view('pages.post-edit', compact('categories', 'tags', 'post'));
+    }
+    public function updatePost(Request $request, $id) {
+        $data = $request->validate([
+            "title"=>"required|string|min:3",
+            "text"=>"required|string",
+        ]);
+        $post = Post::findOrFail($id);
+        $post->update($data);
+
+        $category = Category::findOrFail($request->get('category'));
+        $post->category()->associate($category);
+        $post->save();
+
+        // versione 2 per controllare se ci sono tags
+        $tags = [];
+        try {
+            $tags = Tag::findOrFail($request->get('tags'));
+        } catch (\Exception $e) {}
+
+        $post->tags()->sync($tags);
+        $post->save();        
+     
+        return redirect()->route('posts');
     }
 }

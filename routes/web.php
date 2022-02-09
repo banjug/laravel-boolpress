@@ -23,4 +23,5 @@ Route::middleware('auth')->prefix('/posts')->group(function() { //posso aggiunge
     Route::post('/store', 'PostController@storePost')->name('storePost');
     
     Route::get('/edit/{id}', 'PostController@editPost')->name('editPost');
+    Route::post('/update/{id}', 'PostController@updatePost')->name('updatePost');
 });
