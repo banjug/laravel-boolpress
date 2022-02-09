@@ -35,4 +35,11 @@ class PostController extends Controller
 
         return redirect()->route('posts');
     }
+    public function editPost($id) {
+        $categories=Category::all();
+        $tags=Tag::all();
+        $post=Post::findOrFail($id);
+        
+        return view('pages.post-edit', compact('categories', 'tags', 'post'));
+    }
 }

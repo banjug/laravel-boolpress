@@ -18,7 +18,7 @@
         @auth
         <div class="row">
             <div class="col d-flex justify-content-center">
-                <h3>Welcome {{Auth::user()->name}}!</h3>
+                <h3 class="text-capitalize">Welcome {{Auth::user()->name}}!</h3>
             </div>
         </div>
         @endauth

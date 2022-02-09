@@ -21,4 +21,6 @@ Route::get('/posts', 'PostController@posts')->name('posts');
 Route::middleware('auth')->prefix('/posts')->group(function() { //posso aggiungere ->prefix('posts') siccome le rotte sono raggruppate e aggiunge /posts prima di ogni url
     Route::get('/create', 'PostController@createPost')->name('createPost');
     Route::post('/store', 'PostController@storePost')->name('storePost');
+    
+    Route::get('/edit/{id}', 'PostController@editPost')->name('editPost');
 });

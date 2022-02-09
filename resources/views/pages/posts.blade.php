@@ -30,6 +30,12 @@
                     <div class="row">
                         <p class="lead">Likes: {{$post->likes}}</p>
                     </div>
+                    @auth
+                        <div class="row">
+                            <a class="btn btn-outline-secondary btn-sm" href="{{route('editPost', $post->id)}}">Edit Post</a>
+                            <a class="btn btn-outline-danger btn-sm ml-3" href="">Delete Post</a>
+                        </div>
+                    @endauth
                     <hr>
                 @endforeach
             </div>
